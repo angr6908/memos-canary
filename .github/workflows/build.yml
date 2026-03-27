@@ -12,12 +12,14 @@ jobs:
   build-frontend:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout usememos/memos at specific commit
+      - name: Checkout usememos/memos
         uses: actions/checkout@v6
         with:
           repository: usememos/memos
-          ref: ${{ inputs.commit_sha }}
           fetch-depth: 0
+
+      - name: Checkout specific commit
+        run: git checkout ${{ inputs.commit_sha }}
 
       - uses: pnpm/action-setup@v4.2.0
         with:
@@ -63,12 +65,14 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout usememos/memos at specific commit
+      - name: Checkout usememos/memos
         uses: actions/checkout@v6
         with:
           repository: usememos/memos
-          ref: ${{ inputs.commit_sha }}
           fetch-depth: 0
+
+      - name: Checkout specific commit
+        run: git checkout ${{ inputs.commit_sha }}
 
       - name: Download frontend artifacts
         uses: actions/download-artifact@v7
